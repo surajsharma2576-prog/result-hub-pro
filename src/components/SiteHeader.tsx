@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import cbseLogo from "@/assets/cbse-logo.png";
 
 export function SiteHeader() {
@@ -15,13 +16,19 @@ export function SiteHeader() {
           />
           <div className="min-w-0 flex-1">
             <h1 className="text-lg font-bold leading-tight tracking-tight sm:text-xl md:text-2xl">
-              CBSE Examination Results Portal 2025
+              CBSE Examination Results Portal 2026
             </h1>
             <p className="mt-0.5 text-sm opacity-80 sm:text-base">
               Central Board of Secondary Education
             </p>
           </div>
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="hidden items-center gap-3 md:flex">
+            <Link
+              to="/faq"
+              className="rounded-md bg-primary-foreground/10 px-3 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-foreground/20"
+            >
+              FAQ &amp; Help
+            </Link>
             <div className="secure-badge flex items-center gap-1.5">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />

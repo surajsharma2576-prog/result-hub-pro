@@ -1,3 +1,5 @@
+import { Link } from "@tanstack/react-router";
+
 export function SiteFooter() {
   return (
     <footer className="gov-footer">
@@ -18,6 +20,9 @@ export function SiteFooter() {
               Quick Links
             </h4>
             <ul className="space-y-1 text-xs opacity-70">
+              <li>
+                <Link to="/faq" className="transition-opacity hover:opacity-100">FAQ &amp; Help</Link>
+              </li>
               <li>
                 <a href="#" className="transition-opacity hover:opacity-100">Privacy Policy</a>
               </li>
@@ -41,7 +46,7 @@ export function SiteFooter() {
           </div>
         </div>
         <div className="mt-6 border-t border-primary-foreground/10 pt-4 text-center text-xs opacity-50">
-          © 2025 CBSE Examination Results Portal. All rights reserved.
+          © 2026 CBSE Examination Results Portal. All rights reserved.
         </div>
       </div>
     </footer>
