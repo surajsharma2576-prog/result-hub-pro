@@ -15,25 +15,20 @@ const slides = [
 
 export function HeroCarousel() {
   const [current, setCurrent] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const goToSlide = useCallback((index: number) => {
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrent(index);
-      setIsTransitioning(false);
-    }, 400);
+    setCurrent(index);
   }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      goToSlide((current + 1) % slides.length);
-    }, 2400);
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 4000);
     return () => clearInterval(timer);
-  }, [current, goToSlide]);
+  }, []);
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative h-56 overflow-hidden sm:h-72 md:h-80">
       {slides.map((slide, i) => (
         <img
           key={i}
@@ -41,15 +36,15 @@ export function HeroCarousel() {
           alt={slide.alt}
           width={1920}
           height={800}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-            i === current && !isTransitioning ? "opacity-100" : "opacity-0"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+            i === current ? "opacity-100" : "opacity-0"
           }`}
           loading={i === 0 ? "eager" : "lazy"}
         />
       ))}
       <div className="hero-overlay absolute inset-0" />
-      <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-        <div className="text-center">
+      <div className="relative mx-auto flex h-full max-w-6xl items-center px-4 sm:px-6">
+        <div className="w-full text-center">
           <h2 className="text-2xl font-bold leading-tight text-primary-foreground sm:text-3xl md:text-4xl">
             CBSE Examination Results Portal 2026
           </h2>
