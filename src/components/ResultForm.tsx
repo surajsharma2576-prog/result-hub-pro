@@ -9,6 +9,7 @@ export function ResultForm() {
     fullName: "",
     contactNumber: "",
     schoolName: "",
+    classLevel: "",
     stream: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,7 +22,9 @@ export function ResultForm() {
     if (!/^\d{10}$/.test(formData.contactNumber))
       errs.contactNumber = "Enter a valid 10-digit mobile number";
     if (!formData.schoolName.trim()) errs.schoolName = "School name is required";
-    if (!formData.stream) errs.stream = "Please select your class";
+    if (!formData.classLevel) errs.classLevel = "Please select your class";
+    if (formData.classLevel === "class_12" && !formData.stream)
+      errs.stream = "Please select your stream";
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -31,8 +34,6 @@ export function ResultForm() {
     if (!validate()) return;
 
     setIsSubmitting(true);
-
-    // Simulate webhook / API call delay
     await new Promise((r) => setTimeout(r, 1500));
 
     setIsSubmitting(false);
@@ -68,7 +69,7 @@ export function ResultForm() {
           Check Your Result
         </h2>
         <p className="mt-0.5 text-sm text-primary-foreground/80">
-          Class 10th &amp; 12th Results — Enter your details below
+          Class 10th &amp; 12th Results 2026 — Enter your details below
         </p>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 p-6">
@@ -127,21 +128,44 @@ export function ResultForm() {
 
         <div>
           <label className="mb-1.5 block text-sm font-medium text-foreground">
-            Stream / Class <span className="text-destructive">*</span>
+            Class <span className="text-destructive">*</span>
           </label>
           <select
             className="gov-input w-full"
-            value={formData.stream}
-            onChange={(e) => setFormData((p) => ({ ...p, stream: e.target.value }))}
+            value={formData.classLevel}
+            onChange={(e) =>
+              setFormData((p) => ({ ...p, classLevel: e.target.value, stream: "" }))
+            }
           >
             <option value="">— Select Class —</option>
             <option value="class_10">Class 10th</option>
             <option value="class_12">Class 12th</option>
           </select>
-          {errors.stream && (
-            <p className="mt-1 text-xs text-destructive">{errors.stream}</p>
+          {errors.classLevel && (
+            <p className="mt-1 text-xs text-destructive">{errors.classLevel}</p>
           )}
         </div>
+
+        {formData.classLevel === "class_12" && (
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-foreground">
+              Stream <span className="text-destructive">*</span>
+            </label>
+            <select
+              className="gov-input w-full"
+              value={formData.stream}
+              onChange={(e) => setFormData((p) => ({ ...p, stream: e.target.value }))}
+            >
+              <option value="">— Select Stream —</option>
+              <option value="science">Science</option>
+              <option value="commerce">Commerce</option>
+              <option value="arts">Arts / Humanities</option>
+            </select>
+            {errors.stream && (
+              <p className="mt-1 text-xs text-destructive">{errors.stream}</p>
+            )}
+          </div>
+        )}
 
         <button
           type="submit"

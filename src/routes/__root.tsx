@@ -31,10 +31,10 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "CBSE Results 2025 — Check Class 10th & 12th Results" },
-      { name: "description", content: "Check your CBSE Class 10th and 12th Examination Results 2025 securely. Fast, reliable access to Central Board of Secondary Education results." },
+      { title: "CBSE Results 2026 — Check Class 10th & 12th Results" },
+      { name: "description", content: "Check your CBSE Class 10th and 12th Examination Results 2026 securely. Fast, reliable access to Central Board of Secondary Education results." },
       { name: "author", content: "CBSE Results Portal" },
-      { property: "og:title", content: "CBSE Examination Results Portal 2025" },
+      { property: "og:title", content: "CBSE Examination Results Portal 2026" },
       { property: "og:description", content: "Check your Class 10th & 12th Results securely through our portal." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

@@ -1,10 +1,12 @@
+import { Link } from "@tanstack/react-router";
+
 export function InstructionsPanel() {
   return (
     <div className="space-y-6">
       {/* Notice */}
       <div className="notice-bar rounded-r-lg p-4">
         <p className="text-sm font-semibold text-success">
-          📢 CBSE Results 2025 are now available
+          📢 CBSE Results 2026 are now available
         </p>
         <p className="mt-1 text-sm text-muted-foreground">
           Students can check their Class 10th and 12th examination results through this portal.
@@ -67,6 +69,17 @@ export function InstructionsPanel() {
               {link.label}
             </a>
           ))}
+          <Link
+            to="/faq"
+            className="flex items-center gap-2 text-sm text-primary transition-colors hover:underline"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <path d="M12 17h.01" />
+            </svg>
+            Frequently Asked Questions
+          </Link>
         </div>
       </div>
     </div>
