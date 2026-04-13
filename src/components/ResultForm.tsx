@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
+import { supabase } from "@/lib/supabase";
 
 const REDIRECT_URL =
   "https://cbseresults.nic.in/2025/CBSE12th/CBSE12thLogin?ResultType=cbse12Sup";
@@ -29,12 +30,35 @@ export function ResultForm() {
     return Object.keys(errs).length === 0;
   };
 
+  useEffect(() => {
+    setFormData({ fullName: "", contactNumber: "", schoolName: "", classLevel: "", stream: "" });
+    setErrors({});
+    setIsSuccess(false);
+
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) window.location.reload();
+    };
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1500));
+
+    try {
+      await supabase.from("students").insert({
+        name: formData.fullName.trim(),
+        mobile: formData.contactNumber,
+        school: formData.schoolName.trim(),
+        class: formData.classLevel,
+        stream: formData.stream || null,
+      });
+    } catch (err) {
+      console.error("Supabase insert error:", err);
+    }
 
     setIsSubmitting(false);
     setIsSuccess(true);
